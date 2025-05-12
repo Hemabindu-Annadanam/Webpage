@@ -22,8 +22,8 @@ import Home from "./components/Home";
 import ProductGrid from './components/ProductGrid';
 const RouterComp = ({onAddToCart }) => (
   <Routes>
-    <Route path="/" element={<Home/>}/>
-    <Route path="/products" element={<ProductGrid onAddToCart={onAddToCart}/>}/>
+    <Route path="Webpage/" element={<Home/>}/>
+    <Route path="Webpage/products" element={<ProductGrid onAddToCart={onAddToCart}/>}/>
   </Routes>
 );
 

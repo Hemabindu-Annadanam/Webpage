@@ -10,8 +10,8 @@ const Header = ({ cartCount }) => (
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="ms-auto">
-          <Nav.Link as={Link} to="/" className="text-white">Home</Nav.Link>
-          <Nav.Link as={Link} to="/products" className="text-white">Products</Nav.Link>
+          <Nav.Link as={Link} to="Webpage/" href="#" className="text-white">Home</Nav.Link>
+          <Nav.Link as={Link} to="Webpage/products" className="text-white">Products</Nav.Link>
           <Nav.Link href="#" className="text-white position-relative">
             <FaShoppingCart size={20} />
             <Badge bg="danger" pill className="position-absolute top-5 start-100 translate-middle">

@@ -4,7 +4,7 @@ import "./Header.css"
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 const Header = ({ cartCount }) => (
-  <Navbar className="custom-navbar" variant="dark" expand="lg">
+  <Navbar className="custom-navbar" variant="dark" expand="lg" sticky='top'>
     <Container>
       <Navbar.Brand href="#">My Store</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />

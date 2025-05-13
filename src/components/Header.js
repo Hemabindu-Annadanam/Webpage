@@ -6,7 +6,10 @@ import { FaShoppingCart } from 'react-icons/fa';
 const Header = ({ cartCount }) => (
   <Navbar className="custom-navbar" variant="dark" expand="lg" sticky='top'>
     <Container>
-      <Navbar.Brand href="#">My Store</Navbar.Brand>
+      <Navbar.Brand href="#">
+        <Nav.Link as={Link} to="Webpage/" href="#" className="text-white">My Store</Nav.Link>
+        
+        </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="ms-auto">

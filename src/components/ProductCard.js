@@ -1,14 +1,15 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-
+import './ProductCard.css'
+ import {  toast } from 'react-toastify';
 const ProductCard = ({ product, onAddToCart}) => {
   const handleAddToCart = () => {
-    alert(`${product.title} added to cart!`);
+    toast.success("Product added to cart!");
     onAddToCart();
   };
   return (
     <Card className="h-100">
-      <Card.Img variant="top" src={product.image} />
+      <Card.Img variant="top" src={product.image} className="custom-img"/>
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.title}</Card.Title>
         <Card.Text>${product.price}</Card.Text>

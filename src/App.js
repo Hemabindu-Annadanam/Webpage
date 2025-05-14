@@ -18,6 +18,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import RouterComp from './RoutesComp';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -30,6 +31,7 @@ const App = () => {
     <div className="d-flex flex-column min-vh-100">
       <Header cartCount={cartCount} />
       <RouterComp onAddToCart={handleAddToCart} />
+       <ToastContainer position="top-center" autoClose={3000} />
       <Footer />
     </div>
   );

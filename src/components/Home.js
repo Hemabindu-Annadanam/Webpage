@@ -3,15 +3,12 @@ import './Home.css'
 const Home = () => (
     <div className="image-container">
     <img 
-      src="https://img.freepik.com/premium-photo/glass-smartphone-modern-mobile-device-3d-illustration-render_113524-390.jpg?semt=ais_hybrid&w=740" 
+    src='https://static.vecteezy.com/system/resources/thumbnails/023/309/702/small/ai-generative-e-commerce-concept-shopping-cart-with-boxes-on-a-wooden-table-photo.jpg'
+      // src = "https://media.istockphoto.com/id/1286825422/vector/futuristic-online-shopping-e-commerce-concept-with-glowing-smartphone-shopping-cart-credit.jpg?s=612x612&w=0&k=20&c=PSJSmwBuy8_fpXqkVcVmamNlDeFJhtSLzOx45O3HOso=" 
       alt="background"
       className="background-image"
     />
     <div className="content-overlay">
-    <h2>Welcome to Our Mobile Store</h2>
-    <p>Your one-stop shop for the latest smartphones and accessories. Discover top brands, exclusive deals, and the best customer service.</p>
-    <p>Browse our collection now and find the perfect device that fits your needs and budget!</p>
-    {/* <a href="/products" className="shop-now-btn">Shop Now</a> */}
     </div>
   </div>
   

@@ -7,15 +7,15 @@ const Header = ({ cartCount }) => (
   <Navbar className="custom-navbar" variant="dark" expand="lg" sticky='top'>
     <Container>
       <Navbar.Brand href="#">
-        <Nav.Link as={Link} to="Webpage/" href="#" className="text-white">My Store</Nav.Link>
+        <Nav.Link as={Link} to="Webpage/" href="#" className="text-dark">My Store</Nav.Link>
         
         </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="ms-auto">
-          <Nav.Link as={Link} to="Webpage/" href="#" className="text-white">Home</Nav.Link>
-          <Nav.Link as={Link} to="Webpage/products" className="text-white">Products</Nav.Link>
-          <Nav.Link href="#" className="text-white position-relative">
+          <Nav.Link as={Link} to="Webpage/" href="#" className="text-dark">Home</Nav.Link>
+          <Nav.Link as={Link} to="Webpage/products" className="text-dark">Products</Nav.Link>
+          <Nav.Link href="#" className="text-dark position-relative">
             <FaShoppingCart size={20} />
             <Badge bg="danger" pill className="position-absolute top-5 start-100 translate-middle">
                 {cartCount}

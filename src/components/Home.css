@@ -1,31 +1,6 @@
 .image-container img {
-    width: 100%;    /* Ensure the image stretches to fill the container's width */
-    height: 81vh;   /* Maintain the aspect ratio of the image */
-    position: relative;    /* Ensure the content is positioned relative to this container */
-  }
-  
-  .background-image {
-    width: 100%;           /* Make the image fill the container */
-    height: 100%;
-    object-fit: cover;     /* Ensure the image maintains its aspect ratio while covering the container */
-  }
-  
-  .content-overlay {
-    position: absolute;    /* Position the content absolutely */
-    left: 20px;            /* Set distance from the left side */
-    top: 50%;              /* Center the content vertically */
-    transform: translateY(-50%);  /* Adjust to vertically center the content */
-    color: white;          /* Set text color to white */
-    font-family: Arial, sans-serif; /* Optional: Set font */
-  }
-  
-  .content-overlay h2 {
-    font-size: 24px;        /* Adjust size of heading */
-    margin: 0;
-  }
-  
-  .content-overlay p {
-    font-size: 16px;        /* Adjust size of paragraph */
-    margin-top: 10px;
+    width: 100%;    
+    height: 82vh;  
+    position: fixed;
   }
   

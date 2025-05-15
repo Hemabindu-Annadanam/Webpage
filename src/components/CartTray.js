@@ -22,7 +22,7 @@ const CartTray = ({ show, onClose,onAddToCart  }) => {
 
   const decrement = (index) => {
     const updated = [...cartItems];
-    if ((updated[index].quantity || 1) >= 0) {
+    if ((updated[index].quantity || 1) > 1) {
       updated[index].quantity -= 1;
       updateCart(updated);
     }
@@ -39,12 +39,11 @@ const CartTray = ({ show, onClose,onAddToCart  }) => {
 
   return (
     <div
-      className={`cart-tray ${show ? 'open' : ''}`}
+      className={`cart-tray ${show ? 'open pt-5' : ''}`}
       style={{ width: trayWidth }}
     >
       <div className="cart-header d-flex justify-content-between align-items-center">
         <h5 className="mb-0">Shopping Cart</h5>
-        
         <button className="btn btn-sm btn-light" onClick={onClose}>×</button>
       </div>
       <div className="cart-body">

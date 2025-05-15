@@ -12,7 +12,7 @@ const Header = ({ cartCount,onAddToCart }) => {
   };
   return (
     <div>
-       <Navbar className="custom-navbar" variant="dark" expand="lg" sticky='top'>
+       <Navbar className="custom-navbar fixed-top" variant="dark" expand="lg">
     <Container>
       <Navbar.Brand >
         <Nav.Link as={Link} to="Webpage/" className="text-dark">My Store</Nav.Link>

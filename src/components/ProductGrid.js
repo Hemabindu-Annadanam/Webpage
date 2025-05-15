@@ -20,7 +20,7 @@ const ProductGrid = ({onAddToCart}) =>{
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
       return (
-      <Container className="my-4">
+      <Container className="my-4 pt-5">
             <Form.Group controlId='search' width="30">
                 <Form.Control type='text' placeholder='Search products...' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} ref={searchInputRef} className='mb-4'>
 

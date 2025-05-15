@@ -4,3 +4,31 @@
     margin: 0 auto;
     padding-top: 5px;
 }
+.card-tit{
+    margin: 0 auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+.card-btn {
+  background-color: white !important;
+  border-color: black !important;
+  color: black;
+  width: 50% !important;
+  padding: 7px !important;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: bold;
+  outline: none !important;
+}
+
+.card-btn:hover,
+.card-btn:focus,
+.card-btn:active {
+  background-color: #D2B48C !important; /* darker shade for hover (optional) */
+  border-color: #D2B48C !important;
+  color: black;
+  font-weight: bold;
+  outline: none !important;
+  box-shadow: none !important;
+}

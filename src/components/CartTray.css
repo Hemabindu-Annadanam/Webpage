@@ -1,0 +1,35 @@
+.cart-tray {
+  position: fixed;
+  top: 30;
+  right: -100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+}
+
+.cart-tray.open {
+  right: 0;
+}
+
+.cart-header {
+  padding: 1rem;
+  /* background: #a063c1; */
+  color: black;
+}
+
+.cart-body {
+  padding: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}

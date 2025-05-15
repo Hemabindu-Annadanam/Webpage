@@ -3,8 +3,20 @@ import { Card, Button } from 'react-bootstrap';
 import './ProductCard.css'
  import {  toast } from 'react-toastify';
 const ProductCard = ({ product, onAddToCart}) => {
-  const handleAddToCart = () => {
-    toast.success("Product added to cart!");
+   const handleAddToCart = () => {
+    let cart;
+    try {
+      const storedCart = localStorage.getItem('cart');
+      cart = JSON.parse(storedCart);
+      if (!Array.isArray(cart)) {
+        cart = [];
+      }
+    } catch (error) {
+      cart = [];
+    }
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    toast.success('Product added to cart!');
     onAddToCart();
   };
   return (
@@ -12,8 +24,8 @@ const ProductCard = ({ product, onAddToCart}) => {
       <Card.Img variant="top" src={product.image} className="custom-img"/>
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.title}</Card.Title>
-        <Card.Text>${product.price}</Card.Text>
-        <Button  onClick={handleAddToCart}  style={{ backgroundColor: '#a063c1', borderColor: '#a063c1' }} className="mt-auto">
+        <Card.Text className='card-tit'>${product.price}</Card.Text>
+        <Button  onClick={handleAddToCart}  className="mt-auto card-btn">
           Add to Cart
         </Button>
       </Card.Body>
@@ -22,3 +34,4 @@ const ProductCard = ({ product, onAddToCart}) => {
 };
 
 export default ProductCard;
+

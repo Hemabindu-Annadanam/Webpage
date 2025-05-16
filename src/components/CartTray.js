@@ -4,6 +4,10 @@ import './CartTray.css';
 
 const CartTray = ({ show, onClose,onAddToCart  }) => {
   const [cartItems, setCartItems] = useState([]);
+      const totalPrice = cartItems.reduce(
+    (sum, item) => sum + (item.price * (item.quantity || 1)),
+    0
+    );
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setCartItems(Array.isArray(storedCart) ? storedCart : []);
@@ -67,8 +71,13 @@ const CartTray = ({ show, onClose,onAddToCart  }) => {
           ))
         )}
       </div>
-       <div>
-    </div>
+      <div className="cart-footer border-top p-2">
+         <div className="d-flex justify-content-end gap-2n"> 
+         <span >
+          <strong>Total:</strong>
+          ${totalPrice.toFixed(2)}</span>
+         </div> 
+        </div>
     </div>
   );
 };

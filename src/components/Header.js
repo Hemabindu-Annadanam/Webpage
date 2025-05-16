@@ -15,7 +15,7 @@ const Header = ({ cartCount,onAddToCart }) => {
        <Navbar className="custom-navbar fixed-top" variant="dark" expand="lg">
     <Container>
       <Navbar.Brand >
-        <Nav.Link as={Link} to="Webpage/" className="text-dark"><b>My Store</b></Nav.Link>
+        <Nav.Link as={Link} to="Webpage/" className="text-dark"><b>Click Cart</b></Nav.Link>
         
         </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />

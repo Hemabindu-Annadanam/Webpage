@@ -27,7 +27,7 @@ const Home = () => (
     />
     <div className="content-overlay">
       <div className="overlay-content">
-        <h1>Welcome to Our Store</h1>
+        <h1>Welcome to Click Cart</h1>
         <p>Discover amazing deals and latest products!</p>
         {/* <button className="show-products-button" >Show Products</button> */}
         <Link to="/Webpage/products" className="show-products-button"> Show Products </Link> 

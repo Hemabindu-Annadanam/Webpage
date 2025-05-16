@@ -57,9 +57,9 @@ const CartTray = ({ show, onClose,onAddToCart  }) => {
                 <p className="mb-1 fw-bold">{item.title}</p>
                 <p className="mb-1  fw-bold">${item.price.toFixed(2)}</p>
                 <div className="d-flex align-items-center gap-2">
-                  <button className="btn btn-sm btn-outline-dark" onClick={() => decrement(index)}>-</button>
+                  <button className="btn btn-sm btn-field" onClick={() => decrement(index)}>-</button>
                   <span>{item.quantity || 1}</span>
-                  <button className="btn btn-sm btn-outline-dark" onClick={() => increment(index)}>+</button>
+                  <button className="btn btn-sm btn-field" onClick={() => increment(index)}>+</button>
                   <button className="btn btn-sm btn-danger ms-2" onClick={() => removeItem(index)}>Delete</button>
                 </div>
               </div>

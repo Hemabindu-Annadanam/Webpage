@@ -33,3 +33,15 @@
   object-fit: cover;
   border-radius: 5px;
 }
+.btn-field {
+   border-color:  #D2B48C!important;
+  color: #D2B48C;
+    box-shadow: none;
+}
+
+.btn-field:hover {
+  background-color: #D2B48C;
+  color: white;
+    box-shadow: none;
+     border-color:  #D2B48C!important;
+}

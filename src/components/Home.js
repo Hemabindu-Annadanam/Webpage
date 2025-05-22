@@ -11,10 +11,9 @@ const Home = () => (
     <div className="content-overlay">
       <div className="overlay-content">
         <h1>Welcome to Click Kart</h1>
-        {/* <p>Discover amazing deals and latest products!</p> */}
         <p>Discover amazing deals and the latest products at unbeatable prices!</p>
-<p>From daily essentials to exclusive gadgets, we bring everything you need right to your fingertips.</p>
-<p>Enjoy seamless shopping, fast delivery, and top-notch customer service all in one place.</p>
+        <p>From daily essentials to exclusive gadgets, we bring everything you need right to your fingertips.</p>
+        <p>Enjoy seamless shopping, fast delivery, and top-notch customer service all in one place.</p>
         <Link to="/Webpage/products" className="show-products-button"> Show Products </Link> 
       </div>
     </div>

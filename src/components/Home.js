@@ -1,19 +1,3 @@
-// import React from 'react';
-// import './Home.css'
-// const Home = () => (
-//     <div className="image-container">
-//     <img 
-//       src='https://media.istockphoto.com/id/1215812761/photo/internet-shopping-with-laptop.jpg?s=612x612&w=0&k=20&c=K4RcbDJLHIPZb_oU7okSK4dX1tkEJVU-jhqxYQwTP9s='
-//     alt="background"
-//       className="background-image"
-//     />
-//     <div className="content-overlay">
-//     </div>
-//   </div>
-  
-// );
-
-// export default Home;
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
@@ -21,15 +5,16 @@ import { Link } from 'react-router-dom';
 const Home = () => (
   <div className="image-container">
     <img 
-      src='https://media.istockphoto.com/id/1215812761/photo/internet-shopping-with-laptop.jpg?s=612x612&w=0&k=20&c=K4RcbDJLHIPZb_oU7okSK4dX1tkEJVU-jhqxYQwTP9s='
+      src='https://t3.ftcdn.net/jpg/04/29/97/36/360_F_429973653_N258TnADxIQ0HAiDq31814hWpy9vODDb.jpg'
       alt="background"
-      className="background-image"
-    />
+      className="background-image"/>
     <div className="content-overlay">
       <div className="overlay-content">
-        <h1>Welcome to Click Cart</h1>
-        <p>Discover amazing deals and latest products!</p>
-        {/* <button className="show-products-button" >Show Products</button> */}
+        <h1>Welcome to Click Kart</h1>
+        {/* <p>Discover amazing deals and latest products!</p> */}
+        <p>Discover amazing deals and the latest products at unbeatable prices!</p>
+<p>From daily essentials to exclusive gadgets, we bring everything you need right to your fingertips.</p>
+<p>Enjoy seamless shopping, fast delivery, and top-notch customer service all in one place.</p>
         <Link to="/Webpage/products" className="show-products-button"> Show Products </Link> 
       </div>
     </div>

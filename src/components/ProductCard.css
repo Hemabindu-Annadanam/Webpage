@@ -25,7 +25,7 @@
 .card-btn:hover,
 .card-btn:focus,
 .card-btn:active {
-  background-color: #D2B48C !important; /* darker shade for hover (optional) */
+  background-color: #D2B48C !important;
   border-color: #D2B48C !important;
   color: black;
   font-weight: bold;

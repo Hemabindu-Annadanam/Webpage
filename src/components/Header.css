@@ -1,5 +1,12 @@
 /* App.css */
 .custom-navbar {
-    background-color: #D2B48C!important;
+    background-color: #e6d8c9!important;
+    /* height: 9%; */
      /* background-color: #d899f8!important; */
+  }
+  .scroll-nav{
+    padding-right: 30px;
+  }
+  .nav-brand{
+    padding-left: 30px;
   }

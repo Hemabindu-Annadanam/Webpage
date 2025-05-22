@@ -6,8 +6,6 @@ import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
-
-// Load cart count on initial render
   useEffect(() => {
   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
   if (Array.isArray(storedCart)) {
@@ -32,8 +30,9 @@ useEffect(() => {
 }, []);
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header cartCount={cartCount} onAddToCart={onAddToCart}/>
-      <RouterComp onAddToCart={updateCartCount} />
+      <Header cartCount={cartCount} />
+            {/* <Header cartCount={cartCount}/> */}
+      <RouterComp onAddToCart={updateCartCount} onAddToCartTray={onAddToCart} />
        <ToastContainer position="top-center" autoClose={3000} />
       <Footer />
     </div>

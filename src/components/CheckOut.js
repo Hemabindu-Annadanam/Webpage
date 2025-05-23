@@ -6,11 +6,13 @@ import { toast } from 'react-toastify';
 
 const Checkout = () => {
      const [products, setProducts] = useState([]);
+     const [billingForm, setForm] = useState(true);
       const subTotal = products.reduce(
     (sum, item) => sum + (item.price * (item.quantity || 1)),
     0
     );
     useEffect(() => {
+      // setForm(true)
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
         setProducts(Array.isArray(storedCart) ? storedCart : []);
     }, []);
@@ -75,6 +77,7 @@ const Checkout = () => {
     }
     }
     const handleSubmit = (e) => {
+        setForm(false)
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
@@ -113,10 +116,15 @@ const Checkout = () => {
       const location = data.display_name || `Lat: ${latitude}, Lon: ${longitude}`;
       setFormData(prev => ({ ...prev, address: location }));
       setTouched(prev => ({ ...prev, address: true }));
-      errors.email = ''
+      errors.email = ""
+         const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
+        }
     } catch (error) {
       alert('Failed to fetch address');
-      console.error(error);
+      // console.error(error);
     }
   }, () => {
     alert('Unable to retrieve your location');
@@ -125,8 +133,9 @@ const Checkout = () => {
 
 
     return(
+      
         <div className="d-flex justify-content-center cart-page-wrapper">
-       <Container className="d-flex align-items-start shopping-cart">
+          {billingForm === true?(   <Container className="d-flex align-items-start shopping-cart">
       <Card style={{flex:1, width: '100%', maxWidth: '700px'}}>
          <div className="justify-content-start align-items-start pt-3" style={{paddingLeft:'10px'}}>
             <h5>Billing Details</h5>
@@ -250,11 +259,11 @@ const Checkout = () => {
                             </div>
                                     </>   
                                     )}
-                        
                 </div>
       </Card>
-     
        </Container>
+      ):(<p>Hi</p>)}
+    
      
     </div>
     )

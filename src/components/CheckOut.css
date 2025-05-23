@@ -53,3 +53,111 @@
   border-color: #D2B48C !important;
   box-shadow: 0 0 0 0.2rem rgba(226, 149, 48, 0.25) !important;
 }
+
+
+@media (max-width: 575.98px) {
+  .shopping-cart {
+    flex-direction: column;
+    padding-left: 10px;
+    padding-top: 20%;
+  }
+  .summary-card {
+    margin-left: 15px;
+    margin-top: 20px;
+    width: 100%;
+  }
+  .custom-btn{
+      padding: 10px 24px;
+  margin-top: 16px;
+  font-size: 16px;
+  background-color:white;
+  /* border: none; */
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  outline: auto;
+  width: 60%;
+}
+.custom-btn:hover,
+.custom-btn:focus,
+.custom-btn:active {
+  background-color: #D2B48C !important; 
+  border-color: #D2B48C !important;
+  color: black;
+  font-weight: bold;
+  outline: none !important;
+  box-shadow: none !important;
+}
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .summary-card {
+    width: 100%;
+    margin-left: 0;
+  }
+  .custom-btn{
+      padding: 10px 24px;
+  margin-top: 16px;
+  font-size: 16px;
+  background-color:white;
+  /* border: none; */
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  outline: auto;
+  width: 60%;
+}
+.custom-btn:hover,
+.custom-btn:focus,
+.custom-btn:active {
+  background-color: #D2B48C !important; 
+  border-color: #D2B48C !important;
+  color: black;
+  font-weight: bold;
+  outline: none !important;
+  box-shadow: none !important;
+}
+}
+
+@media (min-width: 768px) {
+  .shopping-cart {
+    flex-direction: row;
+    padding-left: 20%;
+  }
+
+  .summary-card {
+    width: 300px;
+    margin-left: 40px;
+  }
+  .custom-btn{
+      padding: 10px 24px;
+  margin-top: 16px;
+  font-size: 16px;
+  background-color:white;
+  /* border: none; */
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  outline: auto;
+  width: 60%;
+}
+.custom-btn:hover,
+.custom-btn:focus,
+.custom-btn:active {
+  background-color: #D2B48C !important; 
+  border-color: #D2B48C !important;
+  color: black;
+  font-weight: bold;
+  outline: none !important;
+  box-shadow: none !important;
+}
+}

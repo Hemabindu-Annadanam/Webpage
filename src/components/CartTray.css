@@ -198,10 +198,10 @@
 @media (max-width: 575.98px) {
   .shopping-cart-container {
     flex-direction: column;
-    padding-left: 0;
+    padding-left: 10px;
   }
   .proceed-card {
-    margin-left: 0;
+    margin-left: 15px;
     margin-top: 20px;
     width: 100%;
   }

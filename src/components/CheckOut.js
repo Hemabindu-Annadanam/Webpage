@@ -3,6 +3,7 @@ import { Button, Card, Container, Form } from 'react-bootstrap';
 import './CheckOut.css';
 import { FiMapPin } from 'react-icons/fi';
 import { toast } from 'react-toastify';
+import { FaCreditCard, FaEnvelope, FaMapMarkerAlt, FaMoneyBillWave, FaUser } from 'react-icons/fa';
 
 const Checkout = () => {
      const [products, setProducts] = useState([]);
@@ -77,23 +78,24 @@ const Checkout = () => {
     }
     }
     const handleSubmit = (e) => {
-        setForm(false)
+      
         e.preventDefault();
         const validationErrors = validate();
         if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
         return;
         }
+          setForm(false)
          setErrors({});
     setSubmittedData(formData);
             localStorage.removeItem('cart');
 
     setTimeout(() => {
         toast.success('Thank you for your purchase!')
-    }, 2000);
+    }, 3000);
       setTimeout(() => {
       window.location.href = '/Webpage/products';
-    }, 4000);
+    }, 6000);
 
     setFormData({
       name: '',
@@ -133,138 +135,160 @@ const Checkout = () => {
 
 
     return(
-      
         <div className="d-flex justify-content-center cart-page-wrapper">
-          {billingForm === true?(   <Container className="d-flex align-items-start shopping-cart">
-      <Card style={{flex:1, width: '100%', maxWidth: '700px'}}>
-         <div className="justify-content-start align-items-start pt-3" style={{paddingLeft:'10px'}}>
-            <h5>Billing Details</h5>
-            <hr style={{marginRight:'10px'}}/>
-            <Form onSubmit={handleSubmit} noValidate className='custom-Form'>
-               <Form.Group>
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control 
-                  className='control-field'
-                    ref={nameRef}
-                    type='text'
-                    name='name'
-                    value={formData.name}
-                    onChange={handleChange}
-                     onBlur={handleBlur}
-                    isInvalid={touched.name && !!errors.name}
-                    placeholder='Enter Your name..'
-                  />
-                  <Form.Control.Feedback type='invalid'>{errors.name}</Form.Control.Feedback>
-               </Form.Group>
-               <Form.Group controlId='formEmail' className='mb-3 pt-2'>
-                 <Form.Label>Email</Form.Label>
-                 <Form.Control 
-                 className='control-field'
-                   type='email'
-                   name='email'
-                   value={formData.email}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   isInvalid={!!errors.email}
-                   placeholder='Enter your email...'
-                 />
-                 <Form.Control.Feedback type='invalid'>{errors.email}</Form.Control.Feedback>
-               </Form.Group>
-               <Form.Group>
-                 <Form.Label>Address
-                 </Form.Label>
-                 <Form.Control
-                 className='control-field'
-                  as="textarea"
-                  rows={3}
-                  name='address'
-                  value={formData.address}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  isInvalid={!!errors.address}
-                  placeholder='Enter your address...'
-                 />
-                 <span onClick={handleUseCurrentLocation}
-                    className="ms-2 text-primary d-inline-flex align-items-center pt-1"
-                    role="button">
-                        <FiMapPin size={18} className="me-1" />
-                        Select your current location</span>
-                 <Form.Control.Feedback type='invalid'>{errors.address}</Form.Control.Feedback>
-               </Form.Group>
-               <Form.Group controlId="formPayment" className="mb-3 pt-2">
-                 <Form.Label>Payment Option</Form.Label>
-                 <Form.Select
-                 className='control-field'
-                   name='payment'
-                   value={formData.payment}
-                   onChange={handleChange}
-                   onBlur={handleBlur}
-                   isInvalid={!!errors.payment}
-                 >
-                 <option value="">Select</option>
-                 <option value="Credit Card">Credit Card</option>
-                 <option value="Online Payment">Online Payment</option>
-                 <option value="Cash On Delivery">Cash On Delivery</option>
-                 </Form.Select>
-                 <Form.Control.Feedback type='invalid'>{errors.payment}</Form.Control.Feedback>
-               </Form.Group>
-               <Button type="submit" className="custom-btn" style={{marginBottom:'5%'}}>Proceed To Pay </Button>
-            </Form>
-            {submittedData && (
-        <div className="mt-4 border-top pt-3">
-          <h4>Order Summary</h4>
-          <p><strong>Name:</strong> {submittedData.name}</p>
-          <p><strong>Email:</strong> {submittedData.email}</p>
-          <p><strong>Address:</strong> {submittedData.address}</p>
-          <p><strong>Payment:</strong> {submittedData.payment}</p>
-        </div>
-      )}
-        </div>
-      </Card>
-     
-         <Card className="summary-card sticky-card" style={{ width: '300px', height: 'fit-content' }}>
-                <div className="justify-content-start align-items-start pt-3">
-                <h5>Order Summary</h5>
-                <hr style={{marginRight:'10px'}}/>
-                   {products.length === 0 ? (
-                          <p><b>Your shopping cart is empty.</b></p>
-                        ) : (
-                          products.map((product, indexValue) => (
-                            <div className=" position-relative mb-3" key={indexValue}>
-                                <div className=" d-flex justify-content-between align-items-center mb-3">
-                                <div className="ms-2">
-                                    <p className="mb-1">{product.title}</p>
-                                </div>
-                                <div>
-                                    <p className="mb-1" style={{paddingRight:'7px'}}>${product.price.toFixed(2)}</p>
-                                </div>
-                                </div>
-                            </div>
-                          )
-                        ))}
-                      
-                         {products.length ===0 ?(
-                                        <p></p>
-                                    ):(
-                                    <><hr style={{marginRight:'10px'}}/>
-                                      <div className=" position-relative mb-3">
-                                <div className=" d-flex justify-content-between align-items-center mb-3">
-                                <div className="ms-2">
-                                    <p className="mb-1 fw-bold">Total</p>
-                                </div>
-                                <div>
-                                        <p className="mb-1 fw-bold" style={{paddingRight:'7px'}}>${subTotal.toFixed(2)}</p>
-                                </div>
-                                </div>
-                            </div>
-                                    </>   
-                                    )}
+          {billingForm === true?(   
+            <Container className="d-flex align-items-start shopping-cart">
+              <Card style={{flex:1, width: '100%', maxWidth: '700px'}}>
+                <div className="justify-content-start align-items-start pt-3" style={{paddingLeft:'10px'}}>
+                    <h5>Billing Details</h5>
+                    <hr style={{marginRight:'10px'}}/>
+                    <Form onSubmit={handleSubmit} noValidate className='custom-Form'>
+                      <Form.Group>
+                          <Form.Label>Name</Form.Label>
+                          <Form.Control 
+                          className='control-field'
+                            ref={nameRef}
+                            type='text'
+                            name='name'
+                            value={formData.name}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isInvalid={touched.name && !!errors.name}
+                            placeholder='Enter Your name..'
+                          />
+                          <Form.Control.Feedback type='invalid'>{errors.name}</Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId='formEmail' className='mb-3 pt-2'>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control 
+                        className='control-field'
+                          type='email'
+                          name='email'
+                          value={formData.email}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={!!errors.email}
+                          placeholder='Enter your email...'
+                        />
+                        <Form.Control.Feedback type='invalid'>{errors.email}</Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group>
+                        <Form.Label>Address
+                        </Form.Label>
+                        <Form.Control
+                        className='control-field'
+                          as="textarea"
+                          rows={3}
+                          name='address'
+                          value={formData.address}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={!!errors.address}
+                          placeholder='Enter your address...'
+                        />
+                        <span onClick={handleUseCurrentLocation}
+                            className="ms-2 text-primary d-inline-flex align-items-center pt-1"
+                            role="button">
+                                <FiMapPin size={18} className="me-1" />
+                                Select your current location</span>
+                        <Form.Control.Feedback type='invalid'>{errors.address}</Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group controlId="formPayment" className="mb-3 pt-2">
+                        <Form.Label>Payment Option</Form.Label>
+                        <Form.Select
+                        className='control-field'
+                          name='payment'
+                          value={formData.payment}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={!!errors.payment}
+                        >
+                        <option value="">Select</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Online Payment">Online Payment</option>
+                        <option value="Cash On Delivery">Cash On Delivery</option>
+                        </Form.Select>
+                        <Form.Control.Feedback type='invalid'>{errors.payment}</Form.Control.Feedback>
+                      </Form.Group>
+                      {/* disabled={!isFormValid()} */}
+                      <Button type="submit" className="custom-btn"   style={{marginBottom:'5%'}}>Proceed To Pay </Button>
+                    </Form>
                 </div>
-      </Card>
-       </Container>
-      ):(<p>Hi</p>)}
-    
+              </Card>
      
+              <Card className="summary-card sticky-card" style={{ width: '300px', height: 'fit-content' }}>
+                      <div className="justify-content-start align-items-start pt-3">
+                      <h5>Order Summary</h5>
+                      <hr style={{marginRight:'10px'}}/>
+                        {products.length === 0 ? (
+                                <p><b>Your shopping cart is empty.</b></p>
+                              ) : (
+                                products.map((product, indexValue) => (
+                                  <div className=" position-relative mb-3" key={indexValue}>
+                                      <div className=" d-flex justify-content-between align-items-center mb-3">
+                                      <div className="ms-2">
+                                          <p className="mb-1">{product.title}</p>
+                                      </div>
+                                      <div>
+                                          <p className="mb-1" style={{paddingRight:'7px'}}>${product.price.toFixed(2)}</p>
+                                      </div>
+                                      </div>
+                                  </div>
+                                )
+                              ))}
+                            
+                              {products.length ===0 ?(
+                                              <p></p>
+                                          ):(
+                                          <><hr style={{marginRight:'10px'}}/>
+                                            <div className=" position-relative mb-3">
+                                      <div className=" d-flex justify-content-between align-items-center mb-3">
+                                      <div className="ms-2">
+                                          <p className="mb-1 fw-bold">Total</p>
+                                      </div>
+                                      <div>
+                                              <p className="mb-1 fw-bold" style={{paddingRight:'7px'}}>${subTotal.toFixed(2)}</p>
+                                      </div>
+                                      </div>
+                                  </div>
+                                          </>   
+                                          )}
+                      </div>
+              </Card>
+            </Container>
+          ):(
+            <Container className="d-flex align-items-start shopping-cart">
+                <Card style={{flex:1, width: '100%', maxWidth: '700px'}}>
+                <div className="justify-content-start align-items-start pt-3" style={{paddingLeft:'10px'}}>
+                   <h5>Billing Information</h5>
+                    {/* <hr style={{marginRight:'10px'}}/> */}
+                  <div className="mt-4 border-top pt-3">
+                      <p>
+                        <FaUser style={{ marginRight: '8px' }} />
+                        <strong>Name:</strong> {submittedData.name}
+                      </p>
+                      <p>
+                        <FaEnvelope style={{ marginRight: '8px' }} />
+                        <strong>Email:</strong> {submittedData.email}
+                      </p>
+                      <p>
+                        <FaMapMarkerAlt style={{ marginRight: '8px' }} />
+                        <strong>Address:</strong> {submittedData.address}
+                      </p>
+                      <p>
+                        <FaCreditCard style={{ marginRight: '8px' }} />
+                        <strong>Payment Method:</strong> {submittedData.payment}
+                      </p>
+                      <p>
+                        <FaMoneyBillWave style={{ marginRight: '8px' }} />
+                        <strong>Total payment:</strong> ${subTotal.toFixed(2)}
+                      </p>
+                    </div>
+
+                </div>
+                  </Card>
+            </Container>
+          )}
     </div>
     )
 }

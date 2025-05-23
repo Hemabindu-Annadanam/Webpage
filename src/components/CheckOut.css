@@ -44,6 +44,15 @@
   outline: none !important;
   box-shadow: none !important;
 }
+/* .custom-btn:disabled {
+  background-color: white !important;
+  border-color: black !important;
+  opacity: 0.65;
+  cursor: not-allowed;
+  border: 0.5px #D2B48C solid;
+  color: black;
+} */
+
 .control-field{
   border-color:  #D2B48C!important;
   box-shadow: none;

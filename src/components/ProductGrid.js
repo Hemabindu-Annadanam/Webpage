@@ -5,6 +5,9 @@ import './ProductGrid.css'
 const ProductGrid = ({onAddToCart}) =>{
   const [products ,setProducts] = useState([]);
   const [searchTerm,setSearchTerm] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('');
+  const [priceRange, setPriceRange] = useState('');
+  const [minRating, setMinRating] = useState('');
   const searchInputRef = useRef(null)
   useEffect(() => {
       fetch('https://fakestoreapi.com/products')
@@ -17,9 +20,23 @@ const ProductGrid = ({onAddToCart}) =>{
           searchInputRef.current.focus();
         }
       },[])
-      const filterProducts = products.filter((product)=>
-        product.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      const categories = [...new Set(products.map(p=>p.category))]
+      const filterProducts = products.filter((product)=>{
+        // product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
+        const matchesPrice =
+          priceRange === 'under25'
+            ? product.price < 25
+            : priceRange === '25to50'
+            ? product.price >= 25 && product.price <= 50
+            : priceRange === 'above50'
+            ? product.price > 50
+            : true;
+        const matchesRating = minRating ? product.rating?.rate >= parseFloat(minRating) : true;
+        
+        return matchesSearch && matchesCategory && matchesPrice && matchesRating;
+      })
       return (
       <Container className="my-4 container-field">
             <div className='text-center'>
@@ -28,6 +45,46 @@ const ProductGrid = ({onAddToCart}) =>{
 
                 </Form.Control>
             </Form.Group>
+             <Row className="mb-4">
+          <Col md={3}>
+            <Form.Group controlId="category">
+              <Form.Select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value="">All Categories</option>
+                {categories.map((cat, index) => (
+                  <option key={index} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          </Col>
+
+          <Col md={3}>
+            <Form.Group controlId="price">
+              <Form.Select value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
+                <option value="">All Prices</option>
+                <option value="under25">Under $25</option>
+                <option value="25to50">$25 to $50</option>
+                <option value="above50">Above $50</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+
+          <Col md={3}>
+            <Form.Group controlId="rating">
+              <Form.Select value={minRating} onChange={(e) => setMinRating(e.target.value)}>
+                <option value="">All Ratings</option>
+                <option value="1">1 ⭐ & up</option>
+                <option value="2">2 ⭐ & up</option>
+                <option value="3">3 ⭐ & up</option>
+                <option value="4">4 ⭐ & up</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+        </Row>
             </div>
             {filterProducts.length === 0 ?(
                 <div className="text-center my-5">

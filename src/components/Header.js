@@ -3,15 +3,13 @@ import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
 import "./Header.css"
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
-// import CartTray from './CartTray';
+import { useSelector } from 'react-redux';
 
-const Header = ({ cartCount }) => {
-  //   const [showCart, setShowCart] = useState(false);
-  //     const showCartTray = () => {
-  //    setShowCart(true); 
-  // };
+const Header = () => {
+  const cartCount = useSelector(state => state.cart.items.length);
+
   return (
-     <Navbar bg="light" expand="lg" className="custom-navbar fixed-top shadow-sm">
+  <Navbar bg="light" expand="lg" className="custom-navbar fixed-top shadow-sm">
     <Container fluid>
       <Navbar.Brand as={Link} to="/Webpage/" className="d-flex align-items-center gap-2 nav-brand">
         <img src='https://www.seekpng.com/png/small/134-1344280_add-items-to-cart-minimalist-shopping-cart.png'
@@ -40,7 +38,6 @@ const Header = ({ cartCount }) => {
             </Badge>
           </Nav.Link>
         </Nav>
-        {/* <CartTray onAddToCart={onAddToCart} show={showCart} onClose={() => setShowCart(false)} /> */}
       </Navbar.Collapse>
     </Container>
   </Navbar>

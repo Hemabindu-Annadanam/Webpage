@@ -1,54 +1,53 @@
-import React, { useEffect, useState } from 'react';
 import {    Card,  Container } from 'react-bootstrap';
 import './CartTray.css';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCart, clearCart } from '../slices/cartSlice';
 
 const CartTray = ({onAddToCartTray}) => {
-    const [cartItems, setCartItems] = useState([]);
-         const totalPrice = cartItems.reduce(
+  const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cart.items);
+  const totalPrice = cartItems.reduce(
     (sum, item) => sum + (item.price * (item.quantity || 1)),
     0
-    );
-      useEffect(() => {
-        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCartItems(Array.isArray(storedCart) ? storedCart : []);
-      }, []);
+  );
+
     const onEmptyCart = () => {
-      if(cartItems.length === 0 ){
-           toast.warn('Your Cart is Empty!');
-      }
-      else{
+      if (cartItems.length === 0) {
+        toast.warn('Your Cart is Empty!');
+      } else {
         if (window.confirm('Are you sure you want to empty the cart?')) {
-        localStorage.removeItem('cart');
-        window.location.reload();
-      }
+          dispatch(clearCart());
+          toast.success('Cart emptied!');
+        }
       }
     };
     const updateCart = (newItems) => {
-    setCartItems(newItems);
-    localStorage.setItem('cart', JSON.stringify(newItems));
-    onAddToCartTray()
+    dispatch(setCart(newItems));
   };
 
   const increment = (index) => {
-    const updated = [...cartItems];
-    updated[index].quantity = (updated[index].quantity || 1) + 1;
+    const updated = cartItems.map((item, i) =>
+      i === index
+        ? { ...item, quantity: (item.quantity || 1) + 1 }
+        : item
+    );
     updateCart(updated);
   };
 
   const decrement = (index) => {
-    const updated = [...cartItems];
-    if ((updated[index].quantity || 1) > 1) {
-      updated[index].quantity -= 1;
-      updateCart(updated);
-    }
+    const updated = cartItems.map((item, i) =>
+      i === index && (item.quantity || 1) > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    );
+    updateCart(updated);
   };
 
   const removeItem = (index) => {
-    const updated = [...cartItems];
-    updated.splice(index, 1);
+    const updated = cartItems.filter((_, i) => i !== index);
     updateCart(updated);
     
   };

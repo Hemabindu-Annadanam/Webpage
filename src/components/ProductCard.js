@@ -1,23 +1,15 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import './ProductCard.css'
- import {  toast } from 'react-toastify';
-const ProductCard = ({ product, onAddToCart}) => {
-   const handleAddToCart = () => {
-    let cart;
-    try {
-      const storedCart = localStorage.getItem('cart');
-      cart = JSON.parse(storedCart);
-      if (!Array.isArray(cart)) {
-        cart = [];
-      }
-    } catch (error) {
-      cart = [];
-    }
-    cart.push(product);
-    localStorage.setItem('cart', JSON.stringify(cart));
+import {  toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../slices/cartSlice';
+
+const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
     toast.success('Product added to cart!');
-    onAddToCart();
   };
   return (
     <Card className="h-100">

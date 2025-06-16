@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 
-const Home = () => (
+const Home = memo(() => (
   <div className="image-container">
     <img 
       src='https://t3.ftcdn.net/jpg/04/29/97/36/360_F_429973653_N258TnADxIQ0HAiDq31814hWpy9vODDb.jpg'
@@ -18,6 +18,6 @@ const Home = () => (
       </div>
     </div>
   </div>
-);
+));
 
 export default Home;

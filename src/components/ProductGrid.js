@@ -1,122 +1,84 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Container, Row, Col ,Form, Button} from 'react-bootstrap';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
+import { Container, Row, Col ,Form, Button, Alert, Spinner } from 'react-bootstrap';
 import ProductCard from './ProductCard';
 import './ProductGrid.css'
+import { API_ENDPOINTS } from '../config';
+import { filterProducts as filterProductsUtil } from '../utils';
+import FilterForm from './FilterForm';
+
 const ProductGrid = ({onAddToCart}) =>{
   const [products ,setProducts] = useState([]);
   const [searchTerm,setSearchTerm] = useState('')
-    const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [priceRange, setPriceRange] = useState('');
   const [minRating, setMinRating] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [searchError, setSearchError] = useState('');
   const searchInputRef = useRef(null)
   useEffect(() => {
-      fetch('https://fakestoreapi.com/products')
-      .then(response => response.json())
-      .then(data => setProducts(data))
-      .catch(error => console.error('Error fetching products:', error));
-      }, []);
-      useEffect(()=>{
-        if(searchInputRef.current){
-          searchInputRef.current.focus();
-        }
-      },[])
-      const categories = [...new Set(products.map(p=>p.category))]
-      const filterProducts = products.filter((product)=>{
-        // product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        const matchesSearch = product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
-        const matchesPrice =
-          priceRange === 'under25'
-            ? product.price < 25
-            : priceRange === '25to50'
-            ? product.price >= 25 && product.price <= 50
-            : priceRange === 'above50'
-            ? product.price > 50
-            : true;
-        const matchesRating = minRating ? product.rating?.rate >= parseFloat(minRating) : true;
-        
-        return matchesSearch && matchesCategory && matchesPrice && matchesRating;
+      setLoading(true);
+      fetch(API_ENDPOINTS.PRODUCTS)
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to fetch products');
+        return response.json();
       })
-      const handleClearFilters = () => {
-          setSearchTerm('');
-          setSelectedCategory('');
-          setPriceRange('');
-          setMinRating('');
-          if (searchInputRef.current) {
-            searchInputRef.current.focus();
-          }
-        };
-
-      return (
+      .then(data => {
+        setProducts(data);
+        setError(null);
+        setLoading(false);
+      })
+      .catch(error => {
+        setError('Error fetching products. Please try again later.');
+        setProducts([]);
+        setLoading(false);
+      });
+      }, []);
+  useEffect(()=>{
+    if(searchInputRef.current){
+      searchInputRef.current.focus();
+    }
+  },[])
+  const categories = [...new Set(products.map(p=>p.category))]
+  const filterProducts = useMemo(() => filterProductsUtil(products, { searchTerm, selectedCategory, priceRange, minRating }), [products, searchTerm, selectedCategory, priceRange, minRating]);
+  const handleClearFilters = () => {
+      setSearchTerm('');
+      setSelectedCategory('');
+      setPriceRange('');
+      setMinRating('');
+      setSearchError('');
+      if (searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
+    };
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    if (value.length > 50) {
+      setSearchError('Search term must be 50 characters or less.');
+    } else {
+      setSearchError('');
+    }
+  };
+  return (
     <Container className="my-4 container-field">
+      {error && <Alert variant="danger">{error}</Alert>}
+      {loading && <div className="text-center my-4"><Spinner animation="border" role="status"><span className="visually-hidden">Loading...</span></Spinner></div>}
       <div className='text-center'>
-        <Form.Group controlId='search' className='form-field'>
-          <Form.Control
-            type='text'
-            placeholder='Search by product name...'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            ref={searchInputRef}
-            className='mb-4 control-field'
-          />
-        </Form.Group>
-
-        <Row className="mb-4">
-          <Col md={3}>
-            <Form.Group controlId="category">
-              <Form.Select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className='control-field'
-              >
-                <option value="">All Categories</option>
-                {categories.map((cat, index) => (
-                  <option key={index} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-          </Col>
-
-          <Col md={3}>
-            <Form.Group controlId="price">
-              <Form.Select
-                value={priceRange}
-                onChange={(e) => setPriceRange(e.target.value)}
-                className='control-field'
-              >
-                <option value="">All Prices</option>
-                <option value="under25">Under $25</option>
-                <option value="25to50">$25 to $50</option>
-                <option value="above50">Above $50</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-
-          <Col md={3}>
-            <Form.Group controlId="rating">
-              <Form.Select
-                value={minRating}
-                onChange={(e) => setMinRating(e.target.value)}
-                className='control-field'
-              >
-                <option value="">All Ratings</option>
-                <option value="1">1 ⭐ & up</option>
-                <option value="2">2 ⭐ & up</option>
-                <option value="3">3 ⭐ & up</option>
-                <option value="4">4 ⭐ & up</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-
-          <Col md={3} className="d-flex align-items-end">
-           <Button onClick={handleClearFilters} className="clear-outline-btn">
-            Clear
-          </Button>
-
-          </Col>
-        </Row>
+        <FilterForm
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+          searchError={searchError}
+          searchInputRef={searchInputRef}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+          minRating={minRating}
+          setMinRating={setMinRating}
+          onClearFilters={handleClearFilters}
+        />
       </div>
 
       {filterProducts.length === 0 ? (

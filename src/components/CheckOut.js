@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import './CheckOut.css';
 import { FiMapPin } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { FaCreditCard, FaEnvelope, FaMapMarkerAlt, FaMoneyBillWave, FaUser } from 'react-icons/fa';
 
-const Checkout = () => {
+const Checkout = memo(() => {
      const [products, setProducts] = useState([]);
      const [billingForm, setForm] = useState(true);
       const subTotal = products.reduce(
@@ -291,5 +291,5 @@ const Checkout = () => {
           )}
     </div>
     )
-}
+})
 export default Checkout;

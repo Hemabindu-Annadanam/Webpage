@@ -1,49 +1,43 @@
-import {    Card,  Container } from 'react-bootstrap';
+import React, { memo, useState } from 'react';
+import {    Card,  Container, Modal, Button as BsButton } from 'react-bootstrap';
 import './CartTray.css';
 import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCart, clearCart } from '../slices/cartSlice';
+import { setCart, clearCart, incrementQuantity, decrementQuantity } from '../slices/cartSlice';
 
-const CartTray = ({onAddToCartTray}) => {
+const CartTray = memo(({onAddToCartTray}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + (item.price * (item.quantity || 1)),
     0
   );
+  const [showModal, setShowModal] = useState(false);
+  const [modalAction, setModalAction] = useState(null);
 
-    const onEmptyCart = () => {
-      if (cartItems.length === 0) {
-        toast.warn('Your Cart is Empty!');
-      } else {
-        if (window.confirm('Are you sure you want to empty the cart?')) {
-          dispatch(clearCart());
-          toast.success('Cart emptied!');
-        }
-      }
-    };
-    const updateCart = (newItems) => {
+  const onEmptyCart = () => {
+    if (cartItems.length === 0) {
+      toast.warn('Your Cart is Empty!');
+    } else {
+      setShowModal(true);
+      setModalAction(() => () => {
+        dispatch(clearCart());
+        toast.success('Cart emptied!');
+      });
+    }
+  };
+  const updateCart = (newItems) => {
     dispatch(setCart(newItems));
   };
 
   const increment = (index) => {
-    const updated = cartItems.map((item, i) =>
-      i === index
-        ? { ...item, quantity: (item.quantity || 1) + 1 }
-        : item
-    );
-    updateCart(updated);
+    dispatch(incrementQuantity(index));
   };
 
   const decrement = (index) => {
-    const updated = cartItems.map((item, i) =>
-      i === index && (item.quantity || 1) > 1
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    );
-    updateCart(updated);
+    dispatch(decrementQuantity(index));
   };
 
   const removeItem = (index) => {
@@ -53,6 +47,20 @@ const CartTray = ({onAddToCartTray}) => {
   };
 return(
   <div className='pt-4'>
+    <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Action</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to empty the cart?</Modal.Body>
+        <Modal.Footer>
+          <BsButton variant="secondary" onClick={() => setShowModal(false)}>
+            Cancel
+          </BsButton>
+          <BsButton variant="danger" onClick={() => { modalAction(); setShowModal(false); }}>
+            Empty Cart
+          </BsButton>
+        </Modal.Footer>
+      </Modal>
     <div className='px-2 pt-5'>
       <h3 className='px-5'>Shopping Cart</h3>
       <hr/>
@@ -118,5 +126,5 @@ return(
     </div>
     
   </div>
-)}
+)})
 export default CartTray;

@@ -5,7 +5,7 @@ import {  toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
 
-const ProductCard = ({ product }) => {
+const ProductCard = React.memo(({ product }) => {
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(addToCart(product));
@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
       </Card.Body>
     </Card>
   );
-};
+});
 
 export default ProductCard;
 

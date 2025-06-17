@@ -7,10 +7,10 @@ export function filterProducts(products, { searchTerm, selectedCategory, priceRa
       priceRange === 'under25'
         ? product.price < 25
         : priceRange === '25to50'
-        ? product.price >= 25 && product.price <= 50
-        : priceRange === 'above50'
-        ? product.price > 50
-        : true;
+            ? product.price >= 25 && product.price <= 50
+            : priceRange === 'above50'
+                ? product.price > 50
+                : true;
     const matchesRating = minRating ? product.rating?.rate >= parseFloat(minRating) : true;
     return matchesSearch && matchesCategory && matchesPrice && matchesRating;
   });

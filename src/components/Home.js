@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import  { memo } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 

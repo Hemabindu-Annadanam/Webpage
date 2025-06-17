@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import { memo, useState } from 'react';
 import {    Card,  Container, Modal, Button as BsButton } from 'react-bootstrap';
 import './CartTray.css';
 import { Link } from 'react-router-dom';

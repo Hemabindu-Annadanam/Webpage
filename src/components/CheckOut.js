@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, memo } from 'react';
+import  { useEffect, useRef, useState, memo } from 'react';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import './CheckOut.css';
 import { FiMapPin } from 'react-icons/fi';

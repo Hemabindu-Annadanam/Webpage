@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { Container, Row, Col ,Form, Button, Alert, Spinner } from 'react-bootstrap';
+import { Container, Row, Col , Alert, Spinner } from 'react-bootstrap';
 import ProductCard from './ProductCard';
 import './ProductGrid.css'
 import { API_ENDPOINTS } from '../config';

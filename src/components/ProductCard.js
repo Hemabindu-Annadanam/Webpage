@@ -5,7 +5,7 @@ import {  toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
 
-const ProductCard = React.memo(({ product }) => {
+const ProductCard = React.memo(function ProductCard({ product }) {
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(addToCart(product));

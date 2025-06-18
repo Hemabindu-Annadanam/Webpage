@@ -1,11 +1,12 @@
-import  { useEffect, useRef, useState, memo } from 'react';
+import React, { memo } from 'react';
+import  { useEffect, useRef, useState } from 'react';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import './CheckOut.css';
 import { FiMapPin } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { FaCreditCard, FaEnvelope, FaMapMarkerAlt, FaMoneyBillWave, FaUser } from 'react-icons/fa';
 
-const Checkout = memo(() => {
+const Checkout = React.memo(function Checkout() {
      const [products, setProducts] = useState([]);
      const [billingForm, setForm] = useState(true);
       const subTotal = products.reduce(
@@ -15,6 +16,8 @@ const Checkout = memo(() => {
     useEffect(() => {
       // setForm(true)
         const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        console.log('storedCart:-',storedCart);
+        
         setProducts(Array.isArray(storedCart) ? storedCart : []);
     }, []);
       const [formData, setFormData] = useState({

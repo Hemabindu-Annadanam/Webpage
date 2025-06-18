@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import React, {  useState } from 'react';
 import {    Card,  Container, Modal, Button as BsButton } from 'react-bootstrap';
 import './CartTray.css';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCart, clearCart, incrementQuantity, decrementQuantity } from '../slices/cartSlice';
 
-const CartTray = memo(({onAddToCartTray}) => {
+const CartTray = React.memo(function CartTray({onAddToCartTray}) {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
   const totalPrice = cartItems.reduce(

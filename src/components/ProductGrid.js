@@ -104,4 +104,6 @@ const ProductGrid = ({onAddToCart}) =>{
       )
 }
 
+ProductGrid.displayName = 'ProductGrid';
+
 export default ProductGrid;

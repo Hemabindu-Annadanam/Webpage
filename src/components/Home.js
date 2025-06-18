@@ -1,8 +1,8 @@
-import  { memo } from 'react';
+import React, { memo } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 
-const Home = memo(() => (
+const Home = React.memo(() => (
   <div className="image-container">
     <img 
       src='https://t3.ftcdn.net/jpg/04/29/97/36/360_F_429973653_N258TnADxIQ0HAiDq31814hWpy9vODDb.jpg'

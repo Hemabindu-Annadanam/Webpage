@@ -1,11 +1,11 @@
-import  { memo } from 'react';
+import React, { memo } from 'react';
 import { Navbar, Nav, Container, Badge } from 'react-bootstrap';
 import "./Header.css"
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
-const Header = memo(() => {
+const Header = React.memo(function Header() {
   const cartCount = useSelector(state => state.cart.items.length);
 
   return (
